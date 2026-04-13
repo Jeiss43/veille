@@ -19,27 +19,135 @@
 <body class="bg-slate-950 font-sans">
     <div id="root"></div>
     <script type="text/babel" data-type="module">
-import React, { useState, useEffect, useRef } from 'react';\nimport { ChevronRight, X, Package, Target, CheckCircle2, ExternalLink, Info, Zap, Sparkles, MessageSquare, Send, Copy, Loader2, Calendar } from 'lucide-react';\n\nconst CONFIG = {
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronRight, X, Package, Target, CheckCircle2, ExternalLink, Info, Zap, Sparkles, MessageSquare, Send, Copy, Loader2, Calendar } from 'lucide-react';
+import { createRoot } from 'react-dom/client';
+
+const CONFIG = {
   "headerTag": "Veille Stratégique & Innovation",
   "headerTitlePart1": "Innovations Techniques Packaging",
   "headerTitlePart2": "pour Bureau d'Études",
-  "headerDescription": "Synthèse des avancées en matériaux barrières, traçabilité du recyclage et solutions d'allègement pour la période du 6 au 13 avril 2026.",
+  "headerDescription": "Analyse des avancées majeures en barrières aqueuses, solutions fibreuses haute cadence et technologies de traçabilité pour le cycle de vie des emballages.",
   "actionPlanTitle": "Priorités Concrètes",
   "actionPlanItems": [
-    "Tester les nouveaux vernis barrière aqueux pour substituer les films plastiques dans les emballages papier.",
-    "Intégrer des marqueurs UV invisibles dans le design des étiquettes pour améliorer la traçabilité post-consommation.",
-    "Étudier la faisabilité technique du passage au PET ou papier pour les bouteilles de vins et spiritueux.",
-    "Utiliser des outils de simulation numérique pour optimiser le poids des contenants PET et réduire l'empreinte carbone."
+    "Évaluer les coatings aqueux Henkel pour la substitution des films plastiques dans les structures papier.",
+    "Intégrer les marqueurs UV Polytag dans les spécifications d'étiquetage pour optimiser le tri et le recyclage.",
+    "Étudier la viabilité des bouteilles papier Frugalpac pour les segments liquides (vins, huiles).",
+    "Optimiser les schémas de micro-perforation laser pour prolonger la DLC des produits frais."
   ],
-  "aiPromptRole": "Tu es un expert senior en ingénierie packaging et éco-conception, spécialisé dans les matériaux barrières et les technologies de recyclage.",
+  "aiPromptRole": "Tu es un expert senior en ingénierie packaging et éco-conception, spécialisé dans les matériaux barrières et les technologies de tri industriel.",
   "aiMemoPromptText": "Rédige un mémo interne professionnel et concis. Format : Objet, bullet points. Texte fini, sans variables.",
   "tabAnalysisLabel": "Analyse Détaillée",
   "tabAiLabel": "Assistant IA",
   "impactSectionTitle": "Impact Direct & Plan d'Action"
-};\n\nconst ARTICLES_DATA = [\n  {\n    id: 1,\n    iconComponent: Package,\n    iconColor: "text-emerald-400",\n    title: "Henkel - Coatings barrière et scellage pour papier",\n    catchphrase: "Transition vers des structures fibreuses recyclables via des solutions aqueuses.",\n    sourceName: "Packaging Europe",\n    url: "https://packagingeurope.com/news/henkel-coats-paper-with-new-water-based-barrier-and-heat-seal-coatings/14114.article",\n    summary: {"context": "Henkel lance de nouvelles formulations barrière et de scellage à chaud à base d'eau pour le design-for-recycling des emballages papier en Europe.", "keyPoints": ["Remplacement des couches plastiques épaisses par des coatings aqueux minces.", "Compatibilité totale avec les filières de recyclage papier existantes.", "Application sur sachets, flowpacks et étuis papier barrière."], "impacts": ["Nécessité de spécifier finement le grammage et les zones de scellage.", "Sécurisation de la tenue mécanique tout en restant en 'recyclabilité papier'.", "Optimisation des combinaisons d'encres avec les nouveaux vernis."]},\n  },\n  {\n    id: 2,\n    iconComponent: Zap,\n    iconColor: "text-amber-400",\n    title: "Parkside x Two Farmers - Sachets 100% compostables",\n    catchphrase: "Performance barrière équivalente au plastique en version compostable à domicile.",\n    sourceName: "Food and Drink Technology",\n    url: "https://www.foodanddrinktechnology.com/news/66055/frugalpac-scales-high-speed-sustainable-paper-bottles/",\n    summary: {"context": "Lancement d'un sachet flexible Park2Nature certifié 100% compostable pour le marché du snacking (chips).", "keyPoints": ["Structure conçue pour une dégradation complète en compost domestique.", "Maintien des propriétés barrières nécessaires au croquant des produits frits.", "Alternative viable aux complexes plastiques multi-couches traditionnels."], "impacts": ["Benchmark industriel pour les films compostables haute barrière.", "Cadrage des compromis épaisseur/barrière/compostabilité.", "Gestion spécifique de la fenêtre de conservation en distribution réelle."]},\n  },\n  {\n    id: 3,\n    iconComponent: Target,\n    iconColor: "text-purple-400",\n    title: "Kraft Heinz & Polytag - Traçage UV des déchets",\n    catchphrase: "Digitalisation du tri via des DataMatrix invisibles pour un suivi en temps réel.",\n    sourceName: "Labels & Labeling",\n    url: "http://www.labelsandlabeling.com/news/interactive-technology/kraft-heinz-partners-polytag-trace-waste",\n    summary: {"context": "Déploiement industriel de tags UV invisibles pour suivre le cycle de vie des emballages plastiques au Royaume-Uni.", "keyPoints": ["Impression de codes DataMatrix UV invisibles sur les étiquettes.", "Détection automatique en centre de tri via des unités Polytag.", "Collecte de données précises sur les volumes et les filières de recyclage."], "impacts": ["Intégration de marqueurs UV dans les spécifications d'étiquetage.", "Vérification de la lisibilité optique et de la compatibilité recyclage.", "Ajustement des formats et couleurs basé sur les performances réelles de tri."]},\n  },\n  {\n    id: 4,\n    iconComponent: Package,\n    iconColor: "text-cyan-400",\n    title: "Frugalpac - Machine haute cadence pour bouteilles papier",\n    catchphrase: "Industrialisation massive de la bouteille fibreuse à faible empreinte carbone.",\n    sourceName: "Frugalpac",\n    url: "https://frugalpac.com/frugalpac-launches-high-speed-paper-bottle-machine-to-meet-surging-global-demand/",\n    summary: {"context": "Lancement de la FBAM-2, augmentant par cinq la capacité de production de bouteilles en papier recyclé.", "keyPoints": ["Capacité de 14 millions de bouteilles par an par machine.", "Réduction de 84% de l'empreinte carbone par rapport au verre.", "Structure en papier recyclé à 90% avec poche alimentaire interne."], "impacts": ["Opportunité de bascule pour les secteurs vins, spiritueux et huiles.", "Nécessité de repenser la géométrie pour la rigidité des parois.", "Adaptation des interfaces avec les lignes de remplissage existantes."]},\n  },\n  {\n    id: 5,\n    iconComponent: Info,\n    iconColor: "text-emerald-400",\n    title: "Alpla - Montée en puissance du PET pour le vin",\n    catchphrase: "Le PET allégé comme alternative sérieuse au verre pour réduire le CO2.",\n    sourceName: "TecnoFood Online",\n    url: "https://www.tecnofoodonline.com/2026/04/08/pet-bottles-in-wine-packaging-alpla-driving-a-growing-trend/",\n    summary: {"context": "Analyse de la stratégie d'Alpla pour introduire le PET sur le segment premium des vins.", "keyPoints": ["Réduction des émissions de CO2 de 38% (PET vierge) à 50% (rPET).", "Allègement significatif du poids pour le transport.", "Recyclabilité totale dans les flux PET existants."], "impacts": ["Travail sur la perception visuelle et la tenue aromatique.", "Optimisation de la barrière oxygène pour la conservation du vin.", "Compatibilité avec les lignes d'embouteillage dimensionnées pour le verre."]},\n  },\n  {\n    id: 6,\n    iconComponent: Zap,\n    iconColor: "text-purple-400",\n    title: "Fujifilm Jet Press FP790 - Digitalisation du flexible",\n    catchphrase: "L'impression numérique devient compétitive sur les moyennes séries.",\n    sourceName: "World of Print",\n    url: "https://www.worldofprint.com/2026/04/10/fujifilm-to-showcase-a-raft-of-new-features-on-its-flagship-digital-flexible-packaging-press-at-interpack-2026/",\n    summary: {"context": "Nouveaux développements sur la presse numérique Jet Press FP790 pour emballages souples.", "keyPoints": ["Compétitivité face à la flexo jusqu'à 9 000 m et l'hélio jusqu'à 22 000 m.", "Compatibilité élargie aux films MDOPE/BOPE et papier jusqu'à 100 g/m².", "Épaisseur admissible portée à 130 micromètres."], "impacts": ["Faisabilité économique accrue pour les petites séries multi-références.", "Conception de décors compatibles avec les flux conventionnels et numériques.", "Intégration précoce des contraintes de gamut et de surimpression numérique."]},\n  },\n  {\n    id: 7,\n    iconComponent: CheckCircle2,\n    iconColor: "text-cyan-400",\n    title: "BOBST EXPERT K5 - Métalliseur autonome",\n    catchphrase: "Stabilité accrue des couches barrière grâce au pilotage par IA.",\n    sourceName: "BOBST",\n    url: "https://www.bobst.com/en/news/detail/article/1775027402-driving-the-future-of-flexible-packaging-bobst-showcases-innovations-at-chinaplas-2026/",\n    summary: {"context": "Présentation du premier métalliseur au monde doté d'un pilotage autonome 'autonomous drive'.", "keyPoints": ["Contrôle automatisé du processus de métallisation sous vide.", "Amélioration de l'uniformité des couches barrière haute performance.", "Réduction des dérives de production et des rebuts."], "impacts": ["Possibilité de spécifier des cibles d'OTR/WVTR plus strictes.", "Révision des marges de sécurité sur l'épaisseur d'aluminium.", "Dialogue technique renforcé sur les fenêtres de process tenables."]},\n  },\n  {\n    id: 8,\n    iconComponent: Target,\n    iconColor: "text-amber-400",\n    title: "Micro-perforation Laser & Vision pour MAP",\n    catchphrase: "Précision chirurgicale pour la conservation des produits frais.",\n    sourceName: "Food and Drink Technology",\n    url: "https://www.foodanddrinktechnology.com/news/65757/precision-meets-vision/",\n    summary: {"context": "Évolutions des films micro-perforés pour emballages sous atmosphère modifiée (MAP) avec contrôle vision.", "keyPoints": ["Calcul précis des échanges gazeux par perforation laser dimensionnée.", "Inspection 100% en ligne du diamètre et de la forme des trous.", "Correction automatique des dérives laser en temps réel."], "impacts": ["Passage d'une approche empirique à une conception calculée du MAP.", "Exigence de contrôle 100% en ligne dans les cahiers des charges.", "Gains sur la durée de vie produit et réduction du gaspillage en magasin."]},\n  },\n  {\n    id: 9,\n    iconComponent: Info,\n    iconColor: "text-emerald-400",\n    title: "Outil Sidel d'optimisation PET",\n    catchphrase: "Simuler l'allègement et les gains carbone en quelques clics.",\n    sourceName: "Packaging MEA",\n    url: "https://www.packagingmea.com/sidel-launches-online-packaging-optimisation-tool-to-calculate-pet-savings-and-emissions-reductions/",\n    summary: {"context": "Sidel lance un simulateur en ligne pour l'allègement des bouteilles PET et la réduction des émissions.", "keyPoints": ["Simulation sur la bague (-40%), le corps (-35%) et le fond (-20%).", "Calcul immédiat du tonnage PET économisé et de l'impact CO2.", "Prise en compte des taux de rPET et des contraintes mécaniques."], "impacts": ["Support chiffré pour prioriser les chantiers de lightweighting.", "Objectivation des business cases pour le marketing et les achats.", "Équilibre entre réduction de matière et tenue sur ligne/transport."]},\n  },\n  {\n    id: 10,\n    iconComponent: Package,\n    iconColor: "text-purple-400",\n    title: "ILIP - Barquettes AirWave en T2T R-PET",\n    catchphrase: "Boucle fermée barquette-à-barquette pour les fruits délicats.",\n    sourceName: "ILIP",\n    url: "https://www.ilip.it/en/all-news/ilip-at-macfrut-2026-with-solutions-for-the-entire-fruit-and-vegetable-supply-chain-from-packaging-for-delicate-fruit-to-professional-nursery-production/",\n    summary: {"context": "Gamme de barquettes thermoscellables fabriquées à partir de R-PET issu du recyclage de barquettes (Tray-to-Tray).", "keyPoints": ["Utilisation de R-PET certifié contact alimentaire en boucle fermée.", "Conception spécifique pour la protection des fruits fragiles.", "Recyclabilité à 100% dans les flux PET existants."], "impacts": ["Spécification de géométries compatibles avec le flux T2T.", "Documentation fine des taux de rPET pour la conformité réglementaire.", "Validation des combinaisons film opercule/barquette pour le recyclage."]},\n  },\n];\n\nconst apiKey = "AIzaSyAjRCND6ICwLXLMxiYt5C3mrUhn3HWXARg";
+};
 
-const callGemini = async (prompt, signal) => {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+const ARTICLES_DATA = [
+  {
+    id: 1,
+    iconComponent: Package,
+    iconColor: "text-emerald-400",
+    title: "Henkel : Coatings barrière aqueux pour papier",
+    catchphrase: "Remplacer le plastique par des solutions aqueuses recyclables.",
+    sourceName: "Packaging Europe",
+    url: "https://packagingeurope.com/news/henkel-coats-paper-with-new-water-based-barrier-and-heat-seal-coatings/14114.article",
+    summary: {"context": "Henkel lance de nouvelles formulations barrière et de scellage à chaud à base d'eau pour les emballages papier en Europe.", "keyPoints": ["Formulations aqueuses pour le design-for-recycling.", "Remplacement des couches plastiques épaisses par des vernis minces.", "Compatibilité totale avec les filières de recyclage papier existantes."], "impacts": ["Possibilité de concevoir des sachets et flowpacks 100% fibreux.", "Nécessité de spécifier précisément le grammage et les zones de scellage.", "Sécurisation de la tenue mécanique et de l'étanchéité sans plastique."]},
+  },
+  {
+    id: 2,
+    iconComponent: Zap,
+    iconColor: "text-amber-400",
+    title: "Parkside x Two Farmers : Sachets compostables",
+    catchphrase: "Performance barrière équivalente au multicouche en version compostable.",
+    sourceName: "Food & Drink Technology",
+    url: "https://www.foodanddrinktechnology.com/news/66061/parkside-creates-compostable-packs-for-two-farmers/",
+    summary: {"context": "Lancement d'un sachet flexible Park2Nature certifié 100% compostable à domicile pour le marché du snacking.", "keyPoints": ["Structure conçue pour une dégradation complète en compost domestique.", "Barrière haute performance pour produits gras (chips).", "Maintien du croquant et de la tenue mécanique."], "impacts": ["Benchmark industriel pour les films compostables haute barrière.", "Aide au cadrage des compromis épaisseur/barrière/compostabilité.", "Validation de l'usage d'encres compatibles avec le compostage."]},
+  },
+  {
+    id: 3,
+    iconComponent: Target,
+    iconColor: "text-purple-400",
+    title: "Kraft Heinz & Polytag : Traçage UV des déchets",
+    catchphrase: "Des tags invisibles pour suivre le recyclage en temps réel.",
+    sourceName: "Labels & Labeling",
+    url: "http://www.labelsandlabeling.com/news/interactive-technology/kraft-heinz-partners-polytag-trace-waste",
+    summary: {"context": "Déploiement industriel de DataMatrix UV invisibles pour suivre le devenir des emballages plastiques en centre de tri.", "keyPoints": ["Impression en surcouche d'encres UV sur les étiquettes.", "Détection en temps réel au niveau du code-barres.", "Données précises sur les volumes et les filières de recyclage effectives."], "impacts": ["Intégration de marqueurs UV dans les spécifications d'étiquetage.", "Vérification de la lisibilité optique et de la compatibilité recyclage.", "Ajustement des formats packaging selon les performances réelles de tri."]},
+  },
+  {
+    id: 4,
+    iconComponent: Package,
+    iconColor: "text-cyan-400",
+    title: "Frugalpac : Industrialisation de la bouteille papier",
+    catchphrase: "Une machine haute cadence pour détrôner le verre.",
+    sourceName: "Frugalpac",
+    url: "https://frugalpac.com/frugalpac-launches-high-speed-paper-bottle-machine-to-meet-surging-global-demand/",
+    summary: {"context": "Lancement de la FBAM-2, machine d'assemblage de bouteilles papier multipliant par 5 la capacité de production.", "keyPoints": ["Capacité de 14 millions de bouteilles par an.", "Réduction de 84% de l'empreinte carbone par rapport au verre.", "Structure en papier recyclé à 90% avec poche alimentaire interne."], "impacts": ["Opportunité de bascule pour les vins, spiritueux et huiles.", "Nécessité de repenser la géométrie pour la rigidité de paroi.", "Tests requis pour l'interface avec les lignes de remplissage existantes."]},
+  },
+  {
+    id: 5,
+    iconComponent: Info,
+    iconColor: "text-emerald-400",
+    title: "Alpla : Le PET pour le segment des vins",
+    catchphrase: "Réduction de 50% du CO2 par rapport au verre.",
+    sourceName: "TecnoFood",
+    url: "https://www.tecnofoodonline.com/2026/04/08/pet-bottles-in-wine-packaging-alpla-driving-a-growing-trend/",
+    summary: {"context": "Alpla pousse l'adoption du PET allégé pour le vin face à la pression carbone du verre en Europe.", "keyPoints": ["Réduction des émissions de CO2 de 38% à 50% selon le taux de rPET.", "Recyclabilité totale dans les flux PET existants.", "Allègement massif du poids transporté."], "impacts": ["Considérer le PET comme option sérieuse pour les vins premium.", "Travail nécessaire sur la barrière oxygène et la tenue aromatique.", "Adaptation des lignes d'embouteillage traditionnelles."]},
+  },
+  {
+    id: 6,
+    iconComponent: Zap,
+    iconColor: "text-purple-400",
+    title: "Fujifilm Jet Press FP790 : Digitalisation du flexible",
+    catchphrase: "L'impression numérique devient rentable sur les moyennes séries.",
+    sourceName: "World of Print",
+    url: "https://www.worldofprint.com/2026/04/10/fujifilm-to-showcase-a-raft-of-new-features-on-its-flagship-digital-flexible-packaging-press-at-interpack-2026/",
+    summary: {"context": "Nouveaux développements sur la presse numérique FP790 pour emballages souples, ciblant les volumes flexo/hélio.", "keyPoints": ["Rentabilité jusqu'à 9 000 m en flexo et 22 000 m en hélio.", "Compatibilité avec films MDOPE/BOPE et papier jusqu'à 100 g/m2.", "Épaisseur admissible portée à 130 microns."], "impacts": ["Faisabilité économique accrue pour les petites séries multi-références.", "Conception de décors compatibles avec l'impression numérique.", "Intégration précoce des contraintes de gamut et de registre."]},
+  },
+  {
+    id: 7,
+    iconComponent: CheckCircle2,
+    iconColor: "text-amber-400",
+    title: "BOBST EXPERT K5 : Métalliseur autonome",
+    catchphrase: "Premier métalliseur au monde doté d'un pilotage autonome.",
+    sourceName: "BOBST",
+    url: "https://www.bobst.com/en/news/detail/article/1775027402-driving-the-future-of-flexible-packaging-bobst-showcases-innovations-at-chinaplas-2026/",
+    summary: {"context": "Nouvelle génération de métalliseur sous vide intégrant un pilotage autonome du process.", "keyPoints": ["Contrôle automatisé pour une stabilité accrue des couches barrière.", "Optimisation de l'uniformité de la couche d'aluminium.", "Réduction des dérives de process en temps réel."], "impacts": ["Spécification plus fine des cibles OTR/WVTR.", "Révision possible des marges de sécurité sur l'épaisseur d'aluminium.", "Dialogue technique renforcé avec les métalliseurs sur les fenêtres de process."]},
+  },
+  {
+    id: 8,
+    iconComponent: Target,
+    iconColor: "text-cyan-400",
+    title: "Micro-perforation Laser & Vision pour MAP",
+    catchphrase: "Optimiser la durée de vie des produits frais via le contrôle vision.",
+    sourceName: "Food & Drink Technology",
+    url: "https://www.foodanddrinktechnology.com/news/65757/precision-meets-vision/",
+    summary: {"context": "Évolution des films micro-perforés pour atmosphère modifiée (MAP) avec contrôle vision embarqué.", "keyPoints": ["Calcul précis des échanges gazeux par perforation laser.", "Inspection 100% en ligne du diamètre et de la forme des trous.", "Correction automatique des dérives de perforation."], "impacts": ["Passage d'une approche empirique à une conception calculée du MAP.", "Réduction du taux de rebut en magasin pour la 4e gamme.", "Exigence de contrôle 100% en ligne dans les cahiers des charges."]},
+  },
+  {
+    id: 9,
+    iconComponent: Info,
+    iconColor: "text-emerald-400",
+    title: "Outil d'optimisation PET Sidel",
+    catchphrase: "Simuler l'allègement et les gains carbone en quelques clics.",
+    sourceName: "Packaging MEA",
+    url: "https://www.packagingmea.com/sidel-launches-online-packaging-optimisation-tool-to-calculate-pet-savings-and-emissions-reductions/",
+    summary: {"context": "Sidel lance un outil en ligne pour simuler l'allègement des bouteilles PET et les gains de GES associés.", "keyPoints": ["Simulation sur la bague (-40%), le corps (-35%) et le fond (-20%).", "Comparaison directe entre format existant et version optimisée.", "Calcul automatique du tonnage PET économisé par an."], "impacts": ["Support chiffré pour prioriser les chantiers de lightweighting.", "Aide à la décision pour les achats et le marketing.", "Objectivation des business cases basés sur le bénéfice carbone."]},
+  },
+  {
+    id: 10,
+    iconComponent: Package,
+    iconColor: "text-purple-400",
+    title: "ILIP : Barquettes AirWave en T2T R-PET",
+    catchphrase: "La boucle fermée barquette-à-barquette pour les fruits.",
+    sourceName: "ILIP",
+    url: "https://www.ilip.it/en/all-news/ilip-at-macfrut-2026-with-solutions-for-the-entire-fruit-and-vegetable-supply-chain-from-packaging-for-delicate-fruit-to-professional-nursery-production/",
+    summary: {"context": "Gamme de barquettes R-PET thermoscellables issues du recyclage de barquettes (Tray-to-Tray).", "keyPoints": ["Utilisation de R-PET certifié contact alimentaire issu de barquettes.", "Recyclabilité à 100% dans les flux PET existants.", "Conception spécifique pour les fruits fragiles (AirWave)."], "impacts": ["Mise en oeuvre concrète de l'économie circulaire en boucle fermée.", "Spécification de géométries compatibles avec le flux T2T.", "Documentation précise des taux de rPET pour la conformité réglementaire."]},
+  },
+];
+
+const callGemini = async (prompt, signal, key) => {
+  if (!key) throw new Error("Clé API manquante");
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${key}`;
   const payload = { contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: CONFIG.aiPromptRole }] } };
   let retries = 5, delay = 1000;
   
@@ -62,8 +170,10 @@ const callGemini = async (prompt, signal) => {
 
 const formatAiText = (text) => {
   if (!text) return null;
-  const normalizedText = text.replace(/\\n/g, '\n');
-  return normalizedText.split('\n').map((line, i) => {
+  const normalizedText = text.replace(/\n/g, '
+');
+  return normalizedText.split('
+').map((line, i) => {
     if (!line.trim()) return <br key={i} />;
     const parts = line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
       if (part.startsWith('**') && part.endsWith('**')) return <strong key={j} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
@@ -75,10 +185,14 @@ const formatAiText = (text) => {
 
 const GlobalStyles = () => (
   <style dangerouslySetInnerHTML={{ __html: 
-    "@keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }\n" +
-    ".custom-scrollbar::-webkit-scrollbar { width:6px; }\n" +
-    ".custom-scrollbar::-webkit-scrollbar-track { background:transparent; }\n" +
-    ".custom-scrollbar::-webkit-scrollbar-thumb { background:#334155; border-radius:3px; }\n" +
+    "@keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+" +
+    ".custom-scrollbar::-webkit-scrollbar { width:6px; }
+" +
+    ".custom-scrollbar::-webkit-scrollbar-track { background:transparent; }
+" +
+    ".custom-scrollbar::-webkit-scrollbar-thumb { background:#334155; border-radius:3px; }
+" +
     ".animate-modal { animation: modalIn 200ms ease-out forwards; }"
   }} />
 );
@@ -91,10 +205,12 @@ export default function HubIA() {
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [userQuery, setUserQuery] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
+  const [userApiKey, setUserApiKey] = useState('');
   const abortControllerRef = useRef(null);
 
   useEffect(() => {
     setIsLoaded(true);
+    setUserApiKey(localStorage.getItem('hubia_gemini_key') || '');
     return () => { if (abortControllerRef.current) abortControllerRef.current.abort(); };
   }, []);
 
@@ -113,6 +229,7 @@ export default function HubIA() {
 
   const handleGenerateMemo = async () => {
     if (!selectedArticle) return;
+    if (!userApiKey.trim()) { setAiResponse("Veuillez brancher votre propre clé API Gemini."); return; }
     setIsAiLoading(true); setAiResponse('');
     const signal = getNewAbortSignal();
     const context = selectedArticle?.summary?.context || "";
@@ -120,19 +237,20 @@ export default function HubIA() {
     const impacts = selectedArticle?.summary?.impacts?.join(' ') || "";
     const prompt = `${CONFIG.aiMemoPromptText} Sujet : "${selectedArticle.title}". Contexte : ${context} ${points}. Actions : ${impacts}.`;
     
-    try { setAiResponse(await callGemini(prompt, signal)); }
-    catch (err) { if (err.name !== 'AbortError') setAiResponse("Erreur de connexion à l'IA."); }
+    try { setAiResponse(await callGemini(prompt, signal, userApiKey)); }
+    catch (err) { if (err.name !== 'AbortError') setAiResponse(err.message === "Clé API manquante" ? "Veuillez configurer votre clé API." : "Erreur de connexion à l'IA."); }
     finally { setIsAiLoading(false); }
   };
 
   const handleCustomQuery = async () => {
     if (!userQuery.trim() || !selectedArticle) return;
+    if (!userApiKey.trim()) { setAiResponse("Veuillez brancher votre propre clé API Gemini."); return; }
     setIsAiLoading(true); setAiResponse('');
     const signal = getNewAbortSignal();
     const prompt = `Contexte : "${selectedArticle.title}" - ${selectedArticle?.summary?.context || ""}. Question : "${userQuery}". Réponds de manière précise et concise.`;
     
-    try { setAiResponse(await callGemini(prompt, signal)); setUserQuery(''); }
-    catch (err) { if (err.name !== 'AbortError') setAiResponse("L'IA est indisponible."); }
+    try { setAiResponse(await callGemini(prompt, signal, userApiKey)); setUserQuery(''); }
+    catch (err) { if (err.name !== 'AbortError') setAiResponse(err.message === "Clé API manquante" ? "Veuillez configurer votre clé API." : "L'IA est indisponible."); }
     finally { setIsAiLoading(false); }
   };
 
@@ -241,6 +359,10 @@ export default function HubIA() {
                 </div>
               ) : (
                 <div className="flex flex-col h-full space-y-6">
+                  <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-5 mb-2">
+                    <label className="text-cyan-400 font-semibold mb-2 block text-sm"><Sparkles className="w-4 h-4 inline mr-2" />Votre clé API Gemini (sauvegarde locale)</label>
+                    <input type="password" value={userApiKey} onChange={(e) => { setUserApiKey(e.target.value); localStorage.setItem('hubia_gemini_key', e.target.value); }} onFocus={(e) => e.target.type = 'text'} onBlur={(e) => e.target.type = 'password'} placeholder="Commence par AIzaSy..." className="w-full bg-slate-900 border border-slate-700 rounded-lg py-2 pl-3 pr-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm font-mono" />
+                  </div>
                   <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-5">
                     <h4 className="text-cyan-400 font-semibold mb-2 flex items-center"><Sparkles className="w-5 h-5 mr-2" />Que souhaitez-vous faire avec cet article ?</h4>
                     <p className="text-sm text-slate-400 mb-4">L&apos;IA analyse le contexte pour générer des documents de travail ou répondre à vos interrogations.</p>
@@ -278,7 +400,6 @@ export default function HubIA() {
 }
 
         /* INJECTION AUTOMATIQUE POUR RENDRE LE COMPOSANT SUR PAGE STATIQUE */
-        import { createRoot } from 'react-dom/client';
         const root = createRoot(document.getElementById('root'));
         root.render(<HubIA />);
     </script>
