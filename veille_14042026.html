@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Veille du 14/04/2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.2.0",
+                "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+                "lucide-react": "https://esm.sh/lucide-react@0.292.0"
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 font-sans">
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronRight, X, Package, Target, CheckCircle2, ExternalLink, Info, Zap, Sparkles, MessageSquare, Send, Copy, Loader2, Calendar } from 'lucide-react';
+import { createRoot } from 'react-dom/client';
+
+const CONFIG = {
+  "headerTag": "Veille Stratégique & Innovation",
+  "headerTitlePart1": "Innovations Packaging & Durabilité",
+  "headerTitlePart2": "pour Bureau d'Études",
+  "headerDescription": "Analyse des avancées techniques en matériaux barrières, recyclabilité et traçabilité pour le secteur de l'emballage (avril 2026).",
+  "actionPlanTitle": "Priorités Concrètes",
+  "actionPlanItems": [
+    "Évaluer les nouveaux coatings aqueux Henkel pour la transition papier des sachets souples.",
+    "Intégrer les marqueurs UV Polytag dans les spécifications d'étiquetage pour améliorer le tri.",
+    "Simuler l'allègement des gammes PET via l'outil Sidel pour optimiser l'empreinte carbone.",
+    "Explorer les solutions de bouteilles papier haute cadence (Frugalpac) pour les spiritueux et huiles."
+  ],
+  "aiPromptRole": "Tu es un Expert Senior en Ingénierie Packaging et Éco-conception.",
+  "aiMemoPromptText": "Rédige un mémo interne professionnel et concis. Format : Objet, bullet points. Texte fini, sans variables.",
+  "tabAnalysisLabel": "Analyse Détaillée",
+  "tabAiLabel": "Assistant IA",
+  "impactSectionTitle": "Impact Direct & Plan d'Action"
+};
+
+const ARTICLES_DATA = [
+  {
+    id: 1,
+    iconComponent: Package,
+    iconColor: "text-emerald-400",
+    title: "Henkel : Coatings barrière aqueux pour papier",
+    catchphrase: "Accélérer le design-for-recycling des structures fibreuses.",
+    sourceName: "Packaging Europe",
+    url: "https://packagingeurope.com/news/henkel-coats-paper-with-new-water-based-barrier-and-heat-seal-coatings/14114.article",
+    summary: {"context": "Henkel lance des formulations barrière et de scellage à chaud à base d'eau pour remplacer les couches plastiques épaisses dans les emballages papier.", "keyPoints": ["Remplacement des films plastiques par des coatings aqueux minces.", "Compatibilité totale avec les filières de recyclage papier existantes.", "Application sur sachets, flowpacks et étuis barrière."], "impacts": ["Nécessité de spécifier finement le grammage et les zones de scellage.", "Sécurisation de la tenue mécanique tout en restant en 'recyclabilité papier'.", "Optimisation des combinaisons d'encres avec les nouveaux vernis."]},
+  },
+  {
+    id: 2,
+    iconComponent: Zap,
+    iconColor: "text-amber-400",
+    title: "Parkside x Two Farmers : Sachets 100% compostables",
+    catchphrase: "La compostabilité domestique appliquée au snacking haute barrière.",
+    sourceName: "Food & Drink Technology",
+    url: "https://www.foodanddrinktechnology.com/news/66061/parkside-creates-compostable-packs-for-two-farmers/",
+    summary: {"context": "Lancement d'un sachet flexible Park2Nature certifié pour le compostage domestique pour une gamme de chips.", "keyPoints": ["Structure conçue pour une dégradation complète en composteur de jardin.", "Performance barrière équivalente aux multicouches plastiques standards.", "Maintien du croquant et de la tenue mécanique pour produits gras."], "impacts": ["Benchmark industriel pour les films compostables haute barrière.", "Aide au cadrage des compromis épaisseur/barrière/compostabilité.", "Validation de la gestion de la DLC en conditions réelles de distribution."]},
+  },
+  {
+    id: 3,
+    iconComponent: Target,
+    iconColor: "text-purple-400",
+    title: "Kraft Heinz & Polytag : Traçage UV des déchets",
+    catchphrase: "Suivre le cycle de vie des emballages via des marqueurs invisibles.",
+    sourceName: "Labels & Labeling",
+    url: "http://www.labelsandlabeling.com/news/interactive-technology/kraft-heinz-partners-polytag-trace-waste",
+    summary: {"context": "Déploiement industriel de DataMatrix UV invisibles pour identifier les emballages en centre de tri.", "keyPoints": ["Impression en surcouche avec encre UV sur les étiquettes existantes.", "Détection en temps réel fournissant des données au niveau du code-barres.", "Unités de détection à faible coût pour les centres de tri."], "impacts": ["Intégration de zones imprimables UV dans les spécifications d'étiquetage.", "Utilisation des données de retour pour ajuster les choix de matériaux.", "Vérification de la lisibilité optique et de la compatibilité recyclage."]},
+  },
+  {
+    id: 4,
+    iconComponent: Package,
+    iconColor: "text-cyan-400",
+    title: "Frugalpac : Industrialisation de la bouteille papier",
+    catchphrase: "Une machine haute cadence pour détrôner le verre.",
+    sourceName: "Frugalpac",
+    url: "https://frugalpac.com/frugalpac-launches-high-speed-paper-bottle-machine-to-meet-surging-global-demand/",
+    summary: {"context": "Lancement de la FBAM-2, capable de produire 14 millions de bouteilles papier par an.", "keyPoints": ["Réduction de 84% de l'empreinte carbone par rapport au verre.", "Bouteilles composées à 90% de papier recyclé avec poche interne.", "Modèle de production décentralisée chez les embouteilleurs."], "impacts": ["Nouveaux scénarios de bascule pour les vins et spiritueux.", "Besoin de repenser la géométrie pour la rigidité de paroi.", "Adaptation nécessaire des interfaces avec les lignes de remplissage."]},
+  },
+  {
+    id: 5,
+    iconComponent: Info,
+    iconColor: "text-emerald-400",
+    title: "Alpla : Le PET s'impose sur le segment du vin",
+    catchphrase: "Réduire l'empreinte carbone du vin jusqu'à 50%.",
+    sourceName: "TecnoFood",
+    url: "https://www.tecnofoodonline.com/2026/04/08/pet-bottles-in-wine-packaging-alpla-driving-a-growing-trend/",
+    summary: {"context": "Analyse de la stratégie d'Alpla pour substituer le verre par du PET/rPET dans l'industrie vinicole.", "keyPoints": ["Réduction de 38% à 50% du CO2 selon le taux de rPET utilisé.", "Allègement massif facilitant le transport et la logistique.", "Recyclabilité totale dans les flux PET existants."], "impacts": ["Travail sur la perception visuelle 'premium' du PET pour le vin.", "Validation de la barrière oxygène et de la tenue aromatique.", "Compatibilité avec les lignes d'embouteillage traditionnelles."]},
+  },
+  {
+    id: 6,
+    iconComponent: Zap,
+    iconColor: "text-purple-400",
+    title: "Fujifilm Jet Press FP790 : Digitalisation du flexible",
+    catchphrase: "L'impression numérique devient une alternative viable à la flexo.",
+    sourceName: "World of Print",
+    url: "https://www.worldofprint.com/2026/04/10/fujifilm-to-showcase-a-raft-of-new-features-on-its-flagship-digital-flexible-packaging-press-at-interpack-2026/",
+    summary: {"context": "Élargissement des capacités de la presse numérique FP790 pour les emballages souples.", "keyPoints": ["Rentabilité sur des tirages allant jusqu'à 22 000 mètres.", "Support des films MDOPE/BOPE et du papier jusqu'à 100g/m2.", "Épaisseur admissible augmentée à 130 microns."], "impacts": ["Faisabilité économique accrue pour les petites séries multi-références.", "Conception de décors compatibles hybrides (numérique/conventionnel).", "Intégration précoce des contraintes de gamut numérique."]},
+  },
+  {
+    id: 7,
+    iconComponent: CheckCircle2,
+    iconColor: "text-cyan-400",
+    title: "BOBST EXPERT K5 : Métallisation autonome",
+    catchphrase: "Stabilité accrue des couches barrière par pilotage IA.",
+    sourceName: "BOBST",
+    url: "https://www.bobst.com/en/news/detail/article/1775027402-driving-the-future-of-flexible-packaging-bobst-showcases-innovations-at-chinaplas-2026/",
+    summary: {"context": "Présentation du premier métalliseur au monde doté d'un pilotage autonome 'autonomous drive'.", "keyPoints": ["Contrôle automatisé du process de métallisation sous vide.", "Uniformité supérieure des couches barrière déposées.", "Réduction des dérives de production sur films souples."], "impacts": ["Possibilité de spécifier des cibles OTR/WVTR plus strictes.", "Révision des marges de sécurité sur l'épaisseur d'aluminium.", "Dialogue technique renforcé avec les transformateurs sur les fenêtres de process."]},
+  },
+  {
+    id: 8,
+    iconComponent: Target,
+    iconColor: "text-amber-400",
+    title: "Micro-perforation Laser & Vision pour MAP",
+    catchphrase: "Précision chirurgicale pour la conservation des produits frais.",
+    sourceName: "Food & Drink Technology",
+    url: "https://www.foodanddrinktechnology.com/news/65757/precision-meets-vision/",
+    summary: {"context": "Évolution des films micro-perforés combinant laser et contrôle vision pour l'atmosphère modifiée.", "keyPoints": ["Calcul prédictif des échanges gazeux par perforation laser.", "Inspection 100% en ligne du diamètre et de la forme des trous.", "Correction automatique des dérives laser en temps réel."], "impacts": ["Passage d'une approche empirique à une conception calculée du MAP.", "Réduction du taux de rebut en magasin pour la 4e gamme.", "Exigence de contrôle 100% en ligne dans les cahiers des charges."]},
+  },
+  {
+    id: 9,
+    iconComponent: Info,
+    iconColor: "text-emerald-400",
+    title: "Outil Sidel d'optimisation PET",
+    catchphrase: "Simuler l'allègement et les gains carbone en quelques clics.",
+    sourceName: "Packaging MEA",
+    url: "https://www.packagingmea.com/sidel-launches-online-packaging-optimisation-tool-to-calculate-pet-savings-and-emissions-reductions/",
+    summary: {"context": "Sidel lance un simulateur en ligne pour quantifier les gains liés au lightweighting des bouteilles PET.", "keyPoints": ["Simulation sur la bague (-40%), le corps (-35%) et le fond (-20%).", "Calcul automatique des réductions d'émissions de GES.", "Comparaison directe entre format existant et version optimisée."], "impacts": ["Support chiffré pour prioriser les chantiers d'éco-conception.", "Aide à la création de business cases pour le marketing et les achats.", "Équilibrage entre contraintes mécaniques et bénéfices carbone."]},
+  },
+  {
+    id: 10,
+    iconComponent: Package,
+    iconColor: "text-cyan-400",
+    title: "ILIP : Barquettes AirWave en T2T R-PET",
+    catchphrase: "La boucle fermée barquette-à-barquette devient réalité.",
+    sourceName: "ILIP",
+    url: "https://www.ilip.it/en/all-news/ilip-at-macfrut-2026-with-solutions-for-the-entire-fruit-and-vegetable-supply-chain-from-packaging-for-delicate-fruit-to-professional-nursery-production/",
+    summary: {"context": "Lancement d'une gamme de barquettes pour fruits fragiles issues du recyclage de barquettes (Tray-to-Tray).", "keyPoints": ["Matériau R-PET certifié contact alimentaire issu de flux T2T.", "Conception thermoscellable pour fruits rouges et cerises.", "Recyclabilité à 100% dans les flux PET existants."], "impacts": ["Spécification de géométries compatibles avec le recyclage T2T.", "Documentation précise des taux de rPET pour la conformité réglementaire.", "Optimisation du couple film opercule / barquette pour le recyclage."]},
+  },
+];
+
+const callGemini = async (prompt, signal, key) => {
+  if (!key) throw new Error("Clé API manquante");
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${key}`;
+  const payload = { contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: CONFIG.aiPromptRole }] } };
+  let retries = 5, delay = 1000;
+  
+  while (retries > 0) {
+    try {
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
+      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal });
+      if (!response.ok) throw new Error('Erreur API');
+      const data = await response.json();
+      return data?.candidates?.[0]?.content?.parts?.[0]?.text || "Aucune réponse générée.";
+    } catch (error) {
+      if (error.name === 'AbortError') throw error;
+      retries--;
+      if (retries === 0) throw error;
+      await new Promise(res => setTimeout(res, delay));
+      delay *= 2;
+    }
+  }
+};
+
+const formatAiText = (text) => {
+  if (!text) return null;
+  const normalizedText = text.replace(/\\n/g, '\\n');
+  return normalizedText.split('\\n').map((line, i) => {
+    if (!line.trim()) return <br key={i} />;
+    const parts = line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
+      if (part.startsWith('**') && part.endsWith('**')) return <strong key={j} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
+      return part;
+    });
+    return <p key={i} className="mb-2 leading-relaxed">{parts}</p>;
+  });
+};
+
+const GlobalStyles = () => (
+  <style dangerouslySetInnerHTML={{ __html: 
+    "@keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }\\n" +
+    ".custom-scrollbar::-webkit-scrollbar { width:6px; }\\n" +
+    ".custom-scrollbar::-webkit-scrollbar-track { background:transparent; }\\n" +
+    ".custom-scrollbar::-webkit-scrollbar-thumb { background:#334155; border-radius:3px; }\\n" +
+    ".animate-modal { animation: modalIn 200ms ease-out forwards; }"
+  }} />
+);
+
+export default function HubIA() {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [activeTab, setActiveTab] = useState('analyse');
+  const [aiResponse, setAiResponse] = useState('');
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [userQuery, setUserQuery] = useState('');
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [userApiKey, setUserApiKey] = useState('');
+  const abortControllerRef = useRef(null);
+
+  useEffect(() => {
+    setIsLoaded(true);
+    setUserApiKey(localStorage.getItem('hubia_gemini_key') || '');
+    return () => { if (abortControllerRef.current) abortControllerRef.current.abort(); };
+  }, []);
+
+  const getNewAbortSignal = () => {
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
+    return abortControllerRef.current.signal;
+  };
+
+  const openArticle = (article) => { setSelectedArticle(article); setActiveTab('analyse'); setAiResponse(''); setUserQuery(''); };
+  
+  const closeArticle = () => {
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    setSelectedArticle(null); setAiResponse(''); setUserQuery(''); setIsAiLoading(false);
+  };
+
+  const handleGenerateMemo = async () => {
+    if (!selectedArticle) return;
+    if (!userApiKey.trim()) { setAiResponse("Veuillez brancher votre propre clé API Gemini."); return; }
+    setIsAiLoading(true); setAiResponse('');
+    const signal = getNewAbortSignal();
+    const context = selectedArticle?.summary?.context || "";
+    const points = selectedArticle?.summary?.keyPoints?.join(' ') || "";
+    const impacts = selectedArticle?.summary?.impacts?.join(' ') || "";
+    const prompt = `${CONFIG.aiMemoPromptText} Sujet : "${selectedArticle.title}". Contexte : ${context} ${points}. Actions : ${impacts}.`;
+    
+    try { setAiResponse(await callGemini(prompt, signal, userApiKey)); }
+    catch (err) { if (err.name !== 'AbortError') setAiResponse(err.message === "Clé API manquante" ? "Veuillez configurer votre clé API." : "Erreur de connexion à l'IA."); }
+    finally { setIsAiLoading(false); }
+  };
+
+  const handleCustomQuery = async () => {
+    if (!userQuery.trim() || !selectedArticle) return;
+    if (!userApiKey.trim()) { setAiResponse("Veuillez brancher votre propre clé API Gemini."); return; }
+    setIsAiLoading(true); setAiResponse('');
+    const signal = getNewAbortSignal();
+    const prompt = `Contexte : "${selectedArticle.title}" - ${selectedArticle?.summary?.context || ""}. Question : "${userQuery}". Réponds de manière précise et concise.`;
+    
+    try { setAiResponse(await callGemini(prompt, signal, userApiKey)); setUserQuery(''); }
+    catch (err) { if (err.name !== 'AbortError') setAiResponse(err.message === "Clé API manquante" ? "Veuillez configurer votre clé API." : "L'IA est indisponible."); }
+    finally { setIsAiLoading(false); }
+  };
+
+  const handleQueryKeyDown = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleCustomQuery(); } };
+
+  const copyToClipboard = async () => {
+    if (!aiResponse) return;
+    try {
+      if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(aiResponse); }
+      else { const el = document.createElement('textarea'); el.value = aiResponse; el.style.cssText = 'position:fixed;left:-9999px'; document.body.appendChild(el); el.focus(); el.select(); document.execCommand('copy'); document.body.removeChild(el); }
+      setCopySuccess(true); setTimeout(() => setCopySuccess(false), 2000);
+    } catch {}
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans overflow-x-hidden relative">
+      <GlobalStyles />
+      <div className="fixed top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none bg-cyan-600/10 blur-[100px]" />
+      <div className="fixed bottom-0 right-1/4 w-96 h-96 rounded-full pointer-events-none bg-violet-600/10 blur-[120px]" />
+      
+      <header className={`relative z-10 pt-20 pb-12 px-6 md:px-12 max-w-7xl mx-auto transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 mb-6">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <span className="text-sm font-medium text-slate-300 tracking-wide uppercase">{CONFIG.headerTag}</span>
+        </div>
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+          {CONFIG.headerTitlePart1}<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">{CONFIG.headerTitlePart2}</span>
+        </h1>
+        <p className="text-lg md:text-xl text-slate-400 max-w-3xl leading-relaxed">{CONFIG.headerDescription}</p>
+      </header>
+
+      <main className="relative z-10 px-6 md:px-12 pb-16 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ARTICLES_DATA.map((article, index) => (
+            <div key={article.id} onClick={() => openArticle(article)} className={`group cursor-pointer relative p-7 rounded-2xl bg-slate-900/60 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 flex flex-col shadow-xl transition-all duration-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{transitionDelay: `${index * 50}ms`}}>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="w-14 h-14 rounded-xl bg-slate-800/80 flex items-center justify-center border border-slate-700 mb-5 group-hover:scale-110 transition-transform duration-300">
+                  <article.iconComponent className={`w-6 h-6 ${article.iconColor}`} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">{article.title}</h3>
+                <p className="text-slate-400 text-sm flex-grow leading-relaxed">&quot;{article.catchphrase}&quot;</p>
+                <div className="mt-6 flex items-center justify-between text-xs font-bold text-cyan-400 uppercase tracking-wider">
+                  <span className="flex items-center group-hover:translate-x-2 transition-transform duration-300">Dossier <ChevronRight className="w-4 h-4 ml-1" /></span>
+                  <span className="text-slate-600 font-medium normal-case">{article.sourceName}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <section className={`relative z-10 px-6 md:px-12 pb-24 max-w-7xl mx-auto transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none bg-cyan-600/5 blur-[80px]" />
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 flex items-center"><Target className="w-8 h-8 mr-4 text-cyan-400" />{CONFIG.actionPlanTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+            {CONFIG.actionPlanItems.map((action, idx) => (
+              <div key={idx} className="flex items-start space-x-4 bg-slate-800/40 p-5 rounded-xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <p className="text-slate-300 text-sm md:text-base leading-relaxed font-medium">{action}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {selectedArticle && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity" onClick={closeArticle} />
+          <div className="relative w-full max-w-3xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-modal">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500" />
+            <div className="p-6 md:p-8 border-b border-slate-800 bg-slate-900/50 sticky top-0 z-10 backdrop-blur-sm">
+              <button onClick={closeArticle} className="absolute top-6 right-6 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"><X className="w-5 h-5" /></button>
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="p-3 rounded-xl bg-slate-800 border border-slate-700 flex-shrink-0">
+                  <selectedArticle.iconComponent className={`w-6 h-6 ${selectedArticle.iconColor}`} />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight pr-10">{selectedArticle.title}</h2>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 mt-4">
+                <a href={selectedArticle.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-semibold text-slate-900 bg-cyan-400 hover:bg-cyan-300 px-4 py-2 rounded-lg transition-colors">
+                  Source : {selectedArticle.sourceName}<ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+                <div className="flex bg-slate-800 rounded-lg p-1 border border-slate-700 ml-auto mr-auto md:ml-4">
+                  <button onClick={() => setActiveTab('analyse')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTab==='analyse'?'bg-slate-700 text-white shadow':'text-slate-400 hover:text-slate-200'}`}>{CONFIG.tabAnalysisLabel}</button>
+                  <button onClick={() => setActiveTab('ia')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center ${activeTab==='ia'?'bg-cyan-900/40 text-cyan-300 shadow border border-cyan-800/50':'text-slate-400 hover:text-cyan-400'}`}><Sparkles className="w-4 h-4 mr-1.5" />{CONFIG.tabAiLabel}</button>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar flex-1 text-slate-300">
+              {activeTab === 'analyse' ? (
+                <div>
+                  <div className="mb-8">
+                    <h4 className="flex items-center text-sm font-bold text-cyan-400 uppercase tracking-widest mb-3"><Info className="w-4 h-4 mr-2" />Le Contexte</h4>
+                    <p className="text-lg leading-relaxed text-slate-200 italic border-l-2 border-cyan-800 pl-4 bg-slate-800/20 py-2 rounded-r-lg">{selectedArticle?.summary?.context}</p>
+                  </div>
+                  <div className="mb-8">
+                    <h4 className="flex items-center text-sm font-bold text-purple-400 uppercase tracking-widest mb-4"><Zap className="w-4 h-4 mr-2" />Les Faits Marquants</h4>
+                    <ul className="space-y-3">{selectedArticle?.summary?.keyPoints?.map((point, i) => (<li key={i} className="flex items-start"><span className="text-purple-500 mr-3 mt-1.5 text-xs">■</span><span className="leading-relaxed">{point}</span></li>))}</ul>
+                  </div>
+                  <div className="mb-4 bg-slate-800/40 p-6 rounded-xl border border-slate-700">
+                    <h4 className="flex items-center text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4"><Target className="w-4 h-4 mr-2" />{CONFIG.impactSectionTitle}</h4>
+                    <ul className="space-y-4">{selectedArticle?.summary?.impacts?.map((point, i) => (<li key={i} className="flex items-start"><CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-0.5" /><span className="font-medium text-slate-200 leading-relaxed">{point}</span></li>))}</ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col h-full space-y-6">
+                  <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-5 mb-2">
+                    <label className="text-cyan-400 font-semibold mb-2 block text-sm"><Sparkles className="w-4 h-4 inline mr-2" />Votre clé API Gemini (sauvegarde locale)</label>
+                    <input type="password" value={userApiKey} onChange={(e) => { setUserApiKey(e.target.value); localStorage.setItem('hubia_gemini_key', e.target.value); }} onFocus={(e) => e.target.type = 'text'} onBlur={(e) => e.target.type = 'password'} placeholder="Commence par AIzaSy..." className="w-full bg-slate-900 border border-slate-700 rounded-lg py-2 pl-3 pr-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm font-mono" />
+                  </div>
+                  <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-5">
+                    <h4 className="text-cyan-400 font-semibold mb-2 flex items-center"><Sparkles className="w-5 h-5 mr-2" />Que souhaitez-vous faire avec cet article ?</h4>
+                    <p className="text-sm text-slate-400 mb-4">L&apos;IA analyse le contexte pour générer des documents de travail ou répondre à vos interrogations.</p>
+                    <button onClick={handleGenerateMemo} disabled={isAiLoading} className="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-white font-medium flex items-center justify-center transition-colors disabled:opacity-50">
+                      {isAiLoading && !userQuery ? <Loader2 className="w-5 h-5 mr-2 animate-spin text-cyan-400" /> : <MessageSquare className="w-5 h-5 mr-2 text-cyan-400" />}
+                      ✨ Rédiger un mémo interne de synthèse
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <input type="text" value={userQuery} onChange={(e) => setUserQuery(e.target.value)} onKeyDown={handleQueryKeyDown} placeholder="Posez une question sur cet article..." disabled={isAiLoading} className="w-full bg-slate-900 border border-slate-700 rounded-xl py-3 pl-4 pr-12 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" />
+                    <button onClick={handleCustomQuery} disabled={isAiLoading || !userQuery.trim()} className="absolute right-2 top-2 p-1.5 bg-cyan-600 hover:bg-cyan-500 rounded-lg text-white disabled:opacity-50 transition-colors">
+                      {isAiLoading && userQuery ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    </button>
+                  </div>
+                  {aiResponse && (
+                    <div className="mt-4 bg-slate-800/60 border border-slate-700 rounded-xl p-5 relative">
+                      <button onClick={copyToClipboard} className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-white bg-slate-700/50 hover:bg-slate-600 rounded-md transition-colors" title="Copier">
+                        {copySuccess ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                      </button>
+                      <div className="flex items-center mb-3"><Sparkles className="w-5 h-5 text-cyan-400 mr-2" /><span className="font-semibold text-white">Réponse de l&apos;expert IA</span></div>
+                      <div className="text-slate-300 text-sm mt-2">{formatAiText(aiResponse)}</div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="p-6 border-t border-slate-800 bg-slate-900 flex justify-end">
+              <button onClick={closeArticle} className="px-6 py-2.5 rounded-xl border border-slate-600 text-slate-300 font-semibold hover:bg-slate-800 hover:text-white transition-colors">Fermer</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+        /* INJECTION AUTOMATIQUE POUR RENDRE LE COMPOSANT SUR PAGE STATIQUE */
+        const root = createRoot(document.getElementById('root'));
+        root.render(<HubIA />);
+    </script>
+</body>
+</html>
