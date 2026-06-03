@@ -29,244 +29,122 @@ const CONFIG = {
   "headerTag": "Veille Stratégique & Innovation",
   "headerTitlePart1": "Veille Packaging & Matériaux",
   "headerTitlePart2": "Bureau d'Études",
-  "headerDescription": "Veille hebdomadaire sur 10 signaux techniques clés en emballage durable, matériaux, recyclés et smart packaging en Europe.",
+  "headerDescription": "Synthèse hebdomadaire de 10 signaux techniques majeurs sur matériaux, recyclés, smart packaging et tendances PPWR en Europe.",
   "actionPlanTitle": "Priorités Concrètes",
   "actionPlanItems": [
-    "Lancer des pilotes sur films biopolymères actifs et matériaux biosourcés (mycélium, algues, coproduits agro) pour évaluer performances, processabilité et durée de vie.",
-    "Formaliser des spécifications renforcées pour l’intégration de matières recyclées (polyoléfines, autres plastiques) incluant décontamination, traçabilité du contenu recyclé et compatibilité PPWR.",
-    "Mettre à jour les guides de conception pack autour de plateformes monomatériaux, refill/réemploi, critères ACV et contraintes de machinabilité sur lignes dotées d’IA et de capteurs avancés.",
-    "Préparer des cas d’usage prioritaires de smart packaging (indicateurs de fraîcheur, capteurs) en définissant zones d’intégration, impacts recyclabilité et règles d’activation avec marketing et qualité."
+    "Structurer des pilotes sur films biopolymères actifs et matériaux biosourcés (mycélium, algues, coproduits agro) pour évaluer performances, industrialisation et ROI.",
+    "Formaliser des spécifications renforcées pour l’intégration de matières recyclées (polyoléfines et autres plastiques) incluant décontamination, traçabilité et compatibilité PPWR.",
+    "Mettre à jour les guides de conception autour de plateformes monomatériaux, refill/réemploi, critères ACV et contraintes de machinabilité sur lignes équipées d’IA et de capteurs.",
+    "Préparer des cas d’usage prioritaires de smart packaging (indicateurs de fraîcheur, capteurs) en définissant zones d’intégration, impacts recyclabilité et règles d’activation avec marketing/qualité."
   ],
   "aiPromptRole": "Tu es un expert senior en packaging.",
   "aiMemoPromptText": "Rédige un mémo interne professionnel et concis.",
   "tabAnalysisLabel": "Analyse Détaillée",
   "tabAiLabel": "Assistant IA",
-  "impactSectionTitle": "Impact Direct & Plan d'Action",
-  "articles": [
-    {
-      "id": 1,
-      "iconComponent": "Zap",
-      "iconColor": "text-emerald-400",
-      "title": "Films actifs alginate–pectine",
-      "catchphrase": "Des films biopolymères actifs qui prolongent de 10 jours la durée de vie des chips.",
-      "sourceName": "Journal of the Science of Food and Agriculture",
-      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/jsfa.70672",
-      "summary": {
-        "context": "Film biopolymère alginate–pectine enrichi en acide férulique pour emballer des snacks gras et limiter l’oxydation.",
-        "keyPoints": [
-          "Activité antioxydante jusqu’à 90 %.",
-          "Barrière vapeur d’eau et hydrophobicité nettement améliorées.",
-          "Chips conservées au moins 10 jours avec croustillant préservé."
-        ],
-        "impacts": [
-          "Ouvrir des projets de films « full biopolymères » actifs pour le snacking.",
-          "Intégrer compatibilité impression/scellage et cinétique d’oxydation dans les specs.",
-          "Tester la tenue mécanique en ligne sur sachets et doypacks."
-        ]
-      }
-    },
-    {
-      "id": 2,
-      "iconComponent": "CheckCircle2",
-      "iconColor": "text-cyan-400",
-      "title": "Décontamination des polyoléfines recyclées",
-      "catchphrase": "Un procédé haute température + vide réduit de plus de 50 % les contaminants dans rPE/rPP food contact.",
-      "sourceName": "CABI Digital Library",
-      "url": "https://www.cabidigitallibrary.org/doi/10.1079/fsncases.2026.0003",
-      "summary": {
-        "context": "Étude de décontamination de polyoléfines recyclées par haute température sous vide pour sécuriser leur usage alimentaire.",
-        "keyPoints": [
-          "Baisse >50 % des composés volatils et semi-volatils.",
-          "Niveaux de migration nettement réduits après traitement.",
-          "Méthodologie basée sur GC-MS et tests de migration normés."
-        ],
-        "impacts": [
-          "Spécifier des procédés de décontamination et des cibles analytiques aux recycleurs.",
-          "Intégrer ces critères dans les matrices vierge vs recyclé vs chimique.",
-          "Préparer la conformité aux futurs seuils de contenu recyclé PPWR."
-        ]
-      }
-    },
-    {
-      "id": 3,
-      "iconComponent": "Package",
-      "iconColor": "text-emerald-400",
-      "title": "Coproduits agro pour films et papiers",
-      "catchphrase": "Les coproduits agroalimentaires deviennent mousses, films et papiers biodégradables.",
-      "sourceName": "MDPI – Revue scientifique 2026",
-      "url": "https://www.mdpi.com/2412-3811/11/4/138",
-      "summary": {
-        "context": "Revue des usages de résidus agroalimentaires pour formuler mousses, films et papiers d’emballage biodégradables.",
-        "keyPoints": [
-          "Mousses de mycélium, films de pelures et bagasse, papiers renforcés.",
-          "Gains en résistance mécanique et empreinte carbone réduite.",
-          "Variabilité matière et standardisation industrielle critiques."
-        ],
-        "impacts": [
-          "Cartographier les gisements internes de coproduits mobilisables.",
-          "Concevoir des pilotes de calage, papiers renforcés et films minces.",
-          "Intégrer constance qualité et qualification alimentaire dans les cahiers des charges."
-        ]
-      }
-    },
-    {
-      "id": 4,
-      "iconComponent": "Target",
-      "iconColor": "text-purple-400",
-      "title": "Nanocellulose et nanolignine",
-      "catchphrase": "Deux briques nanométriques pour booster module, barrière et UV des packs fibreux.",
-      "sourceName": "Journal of Chemical Technology and Biotechnology",
-      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/jctb.70126",
-      "summary": {
-        "context": "Revue des procédés « verts » pour produire nanocellulose et nanolignine à partir de résidus lignocellulosiques.",
-        "keyPoints": [
-          "Solvants eutectiques, liquides ioniques et catalyseurs hétérogènes employés.",
-          "Amélioration potentielle de module, OTR/WVTR et protection UV.",
-          "Problèmes persistants d’énergie et de complexité procédés."
-        ],
-        "impacts": [
-          "Intégrer ces additifs dans les scénarios matériaux avancés.",
-          "Cadrer les exigences ACV vis-à-vis des futurs fournisseurs.",
-          "Prévoir des architectures capables d’accueillir ces nanomatériaux."
-        ]
-      }
-    },
-    {
-      "id": 5,
-      "iconComponent": "Info",
-      "iconColor": "text-amber-400",
-      "title": "Traceur fluorescent pour contenu recyclé",
-      "catchphrase": "Un azurant optique mesure finement le taux de recyclé dans certains plastiques.",
-      "sourceName": "Polymer International",
-      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/pi.70119",
-      "summary": {
-        "context": "Méthode AIEE utilisant un azurant optique BBS pour quantifier le contenu recyclé dans des plastiques.",
-        "keyPoints": [
-          "Très bonne corrélation fluorescence/taux recyclé en polyamides.",
-          "Résultats limités sur PC amorphes et PP chargés.",
-          "Outil complémentaire aux approches mass-balance et déclaratives."
-        ],
-        "impacts": [
-          "Étudier l’intégration de traceurs optiques dans les flux recyclés.",
-          "Exiger à terme des mesures indépendantes des déclarations fournisseurs.",
-          "Évaluer l’impact sur couleur, migration et recyclabilité globale."
-        ]
-      }
-    },
-    {
-      "id": 6,
-      "iconComponent": "Zap",
-      "iconColor": "text-cyan-400",
-      "title": "IA et data sur lignes de conditionnement",
-      "catchphrase": "Les lignes deviennent auto-réglantes pour absorber matériaux minces et recyclés.",
-      "sourceName": "Interpack 2026 & presse industrie",
-      "url": "https://www.potatopro.com/news/2026/global-processing-and-packaging-industry-set-meet-interpack-2026-dusseldorf",
-      "summary": {
-        "context": "Interpack 2026 met en avant IA, capteurs avancés et modules auto-adaptatifs sur les lignes de conditionnement.",
-        "keyPoints": [
-          "Capteurs temps réel couplés à des modèles prédictifs.",
-          "Ajustement automatique du scellage, formage et cadence.",
-          "Diagnostic à distance et optimisation énergétique intégrés."
-        ],
-        "impacts": [
-          "Documenter propriétés mécaniques et tribologiques des nouveaux packs.",
-          "Définir des fenêtres process compatibles avec le contrôle par IA.",
-          "Intégrer la dimension data/machine dans les AMDEC et revues de design."
-        ]
-      }
-    },
-    {
-      "id": 7,
-      "iconComponent": "Package",
-      "iconColor": "text-emerald-400",
-      "title": "Matériaux végétaux 2026",
-      "catchphrase": "Mycélium, algues et cellulose haute performance complètent la logique recyclé.",
-      "sourceName": "Boxon – Blog tendances 2026",
-      "url": "https://www.boxon.com/knowledge/the-boxon-blog/trender-2026/",
-      "summary": {
-        "context": "Analyse des matériaux d’origine végétale (mycélium, algues, celluloses avancées) pour l’emballage.",
-        "keyPoints": [
-          "Calages en mycélium en alternative au PSE.",
-          "Matériaux dérivés d’algues et bioplastiques améliorés.",
-          "Celluloses à haute performance mécanique et barrière."
-        ],
-        "impacts": [
-          "Cartographier applications pertinentes mycélium/algues par gamme.",
-          "Intégrer scénarios de fin de vie naturelle dans les ACV.",
-          "Positionner ces matériaux sur segments à forte attente durabilité."
-        ]
-      }
-    },
-    {
-      "id": 8,
-      "iconComponent": "Info",
-      "iconColor": "text-purple-400",
-      "title": "Smart packaging orienté décision",
-      "catchphrase": "Des indicateurs de fraîcheur et capteurs transforment le pack en aide à la décision.",
-      "sourceName": "Boxon – Blog tendances 2026",
-      "url": "https://www.boxon.com/knowledge/the-boxon-blog/trender-2026/",
-      "summary": {
-        "context": "Vue d’ensemble de packagings intégrant indicateurs de DLC, chaîne du froid et humidité.",
-        "keyPoints": [
-          "Indicateurs colorimétriques de dépassement de DLC.",
-          "Marqueurs de rupture de chaîne du froid intégrés.",
-          "Capteurs simples pensés compatibles recyclage."
-        ],
-        "impacts": [
-          "Réserver des zones d’intégration pour capteurs et encres actives.",
-          "Vérifier compatibilité avec tri et désassemblage.",
-          "Co-définir les règles de lecture avec marketing et qualité."
-        ]
-      }
-    },
-    {
-      "id": 9,
-      "iconComponent": "Target",
-      "iconColor": "text-emerald-400",
-      "title": "Matériaux biosourcés émergents",
-      "catchphrase": "Des matériaux biosourcés nouvelle génération ciblent e-commerce, cosmétique et frais.",
-      "sourceName": "Ryleon – Insight 2026",
-      "url": "https://www.ryleon.com/insight/2026-regulations-for-product-manufacturers-packaging-pfas-and-epr-requirements",
-      "summary": {
-        "context": "Panoramas 2026 sur mycélium, algues et bioplastiques améliorés pour emballages exigeants.",
-        "keyPoints": [
-          "Calages moulés en mycélium pour logistique.",
-          "Films et gels d’algues pour flexibles et cosmétique.",
-          "Bioplastiques renforcés encore en phase de qualification."
-        ],
-        "impacts": [
-          "Identifier fournisseurs crédibles et lancer des essais en ligne.",
-          "Qualifier barrières, contact produit et durée de vie.",
-          "Cibler des segments à forte valeur image pour premiers déploiements."
-        ]
-      }
-    },
-    {
-      "id": 10,
-      "iconComponent": "Calendar",
-      "iconColor": "text-amber-400",
-      "title": "Refill, réemploi et monomatériaux",
-      "catchphrase": "Remploi, recharge et monomatériaux deviennent la nouvelle base européenne.",
-      "sourceName": "Ryleon – Insight 2026",
-      "url": "https://www.ryleon.com/insight/2026-regulations-for-product-manufacturers-packaging-pfas-and-epr-requirements",
-      "summary": {
-        "context": "Panoramas 2026 montrant la normalisation du remploi, du refill et des monomatériaux en Europe.",
-        "keyPoints": [
-          "Monomatériaux PE, PP, fibre généralisés pour le tri.",
-          "Systèmes rechargeables et réemployables structurés par la distribution.",
-          "Design orienté low-carbon et contenu recyclé obligatoire."
-        ],
-        "impacts": [
-          "Structurer des plateformes monomatériaux compatibles lavage/réutilisation.",
-          "Intégrer systématiquement carbone, recyclé et réemploi dans les cahiers des charges.",
-          "Harmoniser formats et codifications pour DRS et logistique de remploi."
-        ]
-      }
-    }
-  ]
+  "impactSectionTitle": "Impact Direct & Plan d'Action"
 };
 
 const ARTICLES_DATA = [
+  {
+    id: 1,
+    iconComponent: Zap,
+    iconColor: "text-emerald-400",
+    title: "Films actifs alginate–pectine",
+    catchphrase: "Des films biopolymères actifs prolongent la durée de vie des snacks gras.",
+    sourceName: "Journal of the Science of Food and Agriculture",
+    url: "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/jsfa.70672",
+    summary: {"context": "Étude académique sur un film alginate–pectine enrichi en acide férulique pour emballer des chips et limiter l’oxydation.", "keyPoints": ["Film biopolymère conçu pour les produits riches en lipides.", "Propriétés barrières et mécaniques nettement améliorées par l’acide férulique."], "impacts": ["Tester des structures full biopolymères actives sur des gammes snacking.", "Intégrer la compatibilité impression/scellage de ces films dans les spécifications."]},
+  },
+  {
+    id: 2,
+    iconComponent: CheckCircle2,
+    iconColor: "text-cyan-400",
+    title: "Décontamination des polyoléfines recyclées",
+    catchphrase: "Un procédé haute température + vide sécurise les rPE/rPP pour le contact alimentaire.",
+    sourceName: "CABI Digital Library",
+    url: "https://www.cabidigitallibrary.org/doi/10.1079/fsncases.2026.0003",
+    summary: {"context": "Étude d’un procédé de décontamination sous vide à haute température pour polyoléfines recyclées destinées au food contact.", "keyPoints": ["Réduction significative des composés volatils et semi-volatils résiduels.", "Méthodologie combinant analyses GC-MS et tests de migration."], "impacts": ["Exiger des recycleurs des procédés de décontamination caractérisés et auditables.", "Intégrer des critères analytiques précis dans les cahiers des charges rPE/rPP."]},
+  },
+  {
+    id: 3,
+    iconComponent: Package,
+    iconColor: "text-emerald-400",
+    title: "Coproduits agro pour films et papiers",
+    catchphrase: "Les coproduits agroalimentaires deviennent mousses, films et papiers d’emballage.",
+    sourceName: "MDPI – Revue scientifique 2026",
+    url: "https://www.mdpi.com/2412-3811/11/4/138",
+    summary: {"context": "Revue de l’utilisation de résidus agroalimentaires pour formuler mousses, films et papiers d’emballage biodégradables.", "keyPoints": ["Large éventail d’applications du calage au film mince.", "Bénéfices annoncés en empreinte carbone et en valorisation matière."], "impacts": ["Identifier les gisements de coproduits mobilisables dans vos filières.", "Lancer des pilotes pour calages, papiers renforcés et films alternatifs."]},
+  },
+  {
+    id: 4,
+    iconComponent: Target,
+    iconColor: "text-purple-400",
+    title: "Nanocellulose et nanolignine",
+    catchphrase: "Deux additifs nanométriques pour renforcer papiers et bioplastiques.",
+    sourceName: "Journal of Chemical Technology and Biotechnology",
+    url: "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/jctb.70126",
+    summary: {"context": "Revue des procédés de valorisation de résidus lignocellulosiques en nanocellulose et nanolignine pour l’emballage.", "keyPoints": ["Procédés « verts » encore en optimisation énergétique.", "Amélioration visée du module et des barrières OTR/WVTR."], "impacts": ["Suivre ces briques comme futurs additifs dans vos scénarios matériaux avancés.", "Intégrer des exigences ACV fortes pour sélectionner les procédés réellement soutenables."]},
+  },
+  {
+    id: 5,
+    iconComponent: Info,
+    iconColor: "text-amber-400",
+    title: "Traceur fluorescent pour contenu recyclé",
+    catchphrase: "Un azurant optique permet de quantifier le pourcentage de matière recyclée.",
+    sourceName: "Polymer International",
+    url: "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/pi.70119",
+    summary: {"context": "Étude d’une méthode de quantification du contenu recyclé basée sur une émission fluorescente renforcée.", "keyPoints": ["Bonne corrélation signal/taux recyclé pour certains polyamides.", "Limites observées sur d’autres matrices plastiques plus complexes."], "impacts": ["Évaluer l’intérêt de marqueurs optiques pour auditer le contenu recyclé de vos packs.", "Préparer l’intégration de méthodes analytiques indépendantes des déclarations fournisseurs."]},
+  },
+  {
+    id: 6,
+    iconComponent: Zap,
+    iconColor: "text-cyan-400",
+    title: "IA et data sur lignes de conditionnement",
+    catchphrase: "Les machines se règlent automatiquement pour absorber downgauging et recyclés.",
+    sourceName: "Interpack 2026 & presse industrie",
+    url: "https://www.potatopro.com/news/2026/global-processing-and-packaging-industry-set-meet-interpack-2026-dusseldorf",
+    summary: {"context": "Retours d’Interpack sur l’intégration d’IA, de capteurs avancés et de modules auto-adaptatifs sur les lignes de conditionnement.", "keyPoints": ["Capteurs temps réel combinés à des modèles prédictifs.", "Objectifs conjoints de stabilité process et d’efficacité énergétique."], "impacts": ["Documenter précisément les propriétés mécaniques et tribologiques des nouveaux packs.", "Concevoir les structures avec des fenêtres process compatibles avec le contrôle par IA."]},
+  },
+  {
+    id: 7,
+    iconComponent: Package,
+    iconColor: "text-emerald-400",
+    title: "Matériaux végétaux 2026",
+    catchphrase: "Mycélium, algues et celluloses avancées complètent le recyclé.",
+    sourceName: "Boxon – Blog tendances 2026",
+    url: "https://www.boxon.com/knowledge/the-boxon-blog/trender-2026/",
+    summary: {"context": "Analyse de matériaux d’origine végétale pour l’emballage, comme le mycélium, les algues et les celluloses haute performance.", "keyPoints": ["Alternatives proposées aux calages et emballages plastiques conventionnels.", "Positionnement comme compléments aux solutions papier/carton recyclé."], "impacts": ["Cartographier les applications où ces matériaux apportent un différentiel clair.", "Intégrer leurs scénarios de fin de vie naturelle dans vos études ACV."]},
+  },
+  {
+    id: 8,
+    iconComponent: Info,
+    iconColor: "text-purple-400",
+    title: "Smart packaging orienté décision",
+    catchphrase: "Indicateurs de fraîcheur et capteurs transforment le pack en support d’information.",
+    sourceName: "Boxon – Blog tendances 2026",
+    url: "https://www.boxon.com/knowledge/the-boxon-blog/trender-2026/",
+    summary: {"context": "Panorama d’emballages intégrant indicateurs de DLC, chaîne du froid et humidité pour réduire le gaspillage.", "keyPoints": ["Indicateurs colorimétriques pour visualiser les dépassements de conditions.", "Capteurs conçus pour rester lisibles et compatibles avec le recyclage."], "impacts": ["Prévoir des zones dédiées à ces fonctions dans les artworks et les plans de découpe.", "Vérifier leurs effets sur tri, désassemblage éventuel et filières de recyclage."]},
+  },
+  {
+    id: 9,
+    iconComponent: Target,
+    iconColor: "text-emerald-400",
+    title: "Matériaux biosourcés émergents",
+    catchphrase: "Des matériaux biosourcés nouvelle génération visent e-commerce, cosmétique et frais.",
+    sourceName: "Ryleon – Insight 2026",
+    url: "https://www.ryleon.com/insight/2026-regulations-for-product-manufacturers-packaging-pfas-and-epr-requirements",
+    summary: {"context": "Analyses 2026 sur les structures biosourcées innovantes pour des usages logistiques et premium.", "keyPoints": ["Calages moulés en mycélium pour la logistique.", "Films et gels issus d’algues pour flexibles et cosmétique."], "impacts": ["Identifier et qualifier des fournisseurs européens crédibles sur ces segments.", "Positionner ces matériaux sur des gammes à forte valeur image pour absorber les surcoûts."]},
+  },
+  {
+    id: 10,
+    iconComponent: Calendar,
+    iconColor: "text-amber-400",
+    title: "Refill, réemploi et monomatériaux",
+    catchphrase: "Réemploi, recharge et monomatériaux deviennent la nouvelle base européenne.",
+    sourceName: "Ryleon – Insight 2026",
+    url: "https://www.ryleon.com/insight/2026-regulations-for-product-manufacturers-packaging-pfas-and-epr-requirements",
+    summary: {"context": "Panoramas 2026 montrant la normalisation du remploi, du refill et des monomatériaux pour le packaging en Europe.", "keyPoints": ["Monomatériaux PE, PP et fibre mis en avant pour le tri et le recyclage.", "Systèmes de recharge et de réemploi structurés par les distributeurs."], "impacts": ["Structurer des plateformes monomatériaux compatibles lavage, réutilisation et refill.", "Intégrer carbone, contenu recyclé et scénarios de remploi dans toutes les nouvelles conceptions."]},
+  },
 ];
 
 const callGemini = async (prompt, signal, key) => {
