@@ -7,14 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="importmap">
-       {
-    "imports": {
-        "react": "https://esm.sh/react@18.2.0",
-        "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
-        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-        "lucide-react": "https://esm.sh/lucide-react@0.292.0"
-    }
-}
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.2.0",
+                "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+                "lucide-react": "https://esm.sh/lucide-react@0.292.0"
+            }
+        }
     </script>
 </head>
 <body class="bg-slate-950 font-sans">
@@ -30,13 +29,13 @@ const CONFIG = {
   "headerTag": "Veille Stratégique & Innovation",
   "headerTitlePart1": "Innovations Packaging",
   "headerTitlePart2": "pour Bureaux d'Études",
-  "headerDescription": "Sélection d'informations techniques sur les nouveaux matériaux, procédés et tendances pour l'éco-conception d'emballages.",
+  "headerDescription": "Sélection technique d'innovations matériaux et procédés pour l'éco-conception d'emballages.",
   "actionPlanTitle": "Priorités Concrètes",
   "actionPlanItems": [
-    "Évaluer l'intégration des composites rPP/PLA renforcés paille de blé.",
-    "Tester des bioplastiques issus de déchets agro-ressources (ex: Oliplast).",
-    "Anticiper l'impact du bio-recyclage enzymatique du PET sur les designs complexes.",
-    "Orienter la R&D vers les films et coatings biosourcés ciblés par Horizon Europe."
+    "Explorer les composites bio-sourcés (paille, noyaux d'olive) pour réduire l'usage de plastiques vierges.",
+    "Intégrer le bio-recyclage enzymatique du PET dans les scénarios de fin de vie des structures complexes.",
+    "Tester les papiers barrière compostables pour remplacer les complexes plastiques dans les applications alimentaires sèches.",
+    "Documenter les additifs et formulations pour optimiser la valorisation en recyclage chimique et enzymatique."
   ],
   "aiPromptRole": "Tu es un expert senior en éco-conception d'emballages.",
   "aiMemoPromptText": "Rédige un mémo interne professionnel et concis. Format : Objet, bullet points. Texte fini, sans variables.",
@@ -54,27 +53,27 @@ const ARTICLES_DATA = [
     catchphrase: "Vers des emballages hybrides recyclables et compostables.",
     sourceName: "Institut letton de chimie du bois",
     url: "https://www.researchlatvia.gov.lv/en/composite-material-mission-agricultural-residues-future-food-packaging",
-    summary: {"context": "Développement d'un composite polymère hybride (rPP/PLA) renforcé par de la paille de blé modifiée et des additifs bio-sourcés.", "keyPoints": ["Matrice hybride rPP/PLA avec renfort paille de blé.", "Additifs fonctionnels issus de résidus de bioraffinerie.", "Objectif zéro déchet et bioéconomie circulaire."], "impacts": ["Alternative aux PP vierges pour emballages classe A-B (PPWR).", "Rigidité accrue pour bacs, seaux, contenants vrac.", "Éco-conception et gains ACV via sourcing local."]},
+    summary: {"context": "Développement d'un composite polymère hybride (rPP/PLA) renforcé par de la paille de blé modifiée et des additifs bio-sourcés.", "keyPoints": ["Matrice hybride rPP/PLA avec renfort paille de blé.", "Additifs fonctionnels issus de résidus de bioraffinerie (lignine, subérine).", "Objectif zéro déchet et bioéconomie circulaire."], "impacts": ["Piste pour remplacer PP vierge avec compromis recyclabilité/biodégradabilité.", "Design de contenants rigides et éco-conçus.", "Opportunité de sourcing local et gains ACV."]},
   },
   {
     id: 2,
     iconComponent: Zap,
     iconColor: "text-cyan-400",
     title: "Bioplastique Oliplast à partir de déchets d’olive",
-    catchphrase: "Valorisation des noyaux d'olive en emballages biodégradables.",
+    catchphrase: "Valorisation des noyaux d'olive pour des emballages biodégradables.",
     sourceName: "AIMPLAS / OLIPE",
     url: "https://packagingeurope.com/aimplas-and-olipe-develop-bioplastic-material-for-oil-packaging-from-olive-waste/5905.article",
-    summary: {"context": "Transformation de déchets de noyaux d'olive en un bioplastique (Oliplast) pour applications d'emballage.", "keyPoints": ["Oliplast : charge noyaux d'olive + matrice renouvelable.", "Biodégradable et compostable.", "Procédés extrusion et injection compatibles."], "impacts": ["Potentiel pour bouchons et accessoires avec storytelling circuit court.", "À surveiller pour tenue mécanique et barrière.", "Transposable à d'autres filières régionales."]},
+    summary: {"context": "Transformation de déchets de noyaux d'olive en un bioplastique (Oliplast) pour applications d'emballage.", "keyPoints": ["Compound thermoplastique intégrant charge de noyaux d'olive.", "Matrice polymère renouvelable, biodégradable et compostable.", "Procédés compatibles extrusion et injection."], "impacts": ["Potentiel pour bouchons et accessoires avec storytelling circuit court.", "À surveiller pour tenue mécanique et barrière.", "Transposable à d'autres filières agro-ressources régionales."]},
   },
   {
     id: 3,
     iconComponent: Info,
     iconColor: "text-amber-400",
     title: "Plant pilote de bio‑recyclage enzymatique du PET en France",
-    catchphrase: "Révolution du recyclage des flux PET complexes.",
+    catchphrase: "Révolution du recyclage du PET complexe et multicouche.",
     sourceName: "Carbios",
     url: "https://packagingeurope.com/news/groundbreaking-ceremony-held-for-worlds-first-pet-bio-recycling-plant/11271.article",
-    summary: {"context": "Lancement de la première usine industrielle de bio-recyclage enzymatique du PET par Carbios.", "keyPoints": ["Recyclage de flux PET peu ou pas recyclés (multicouches, opaques, textiles).", "Capacité de 50 000 t/an.", "Soutien public et stratégique européen."], "impacts": ["Designs PET complexes potentiellement recyclables.", "Reconsidération du compromis mono/multicouche.", "Importance accrue de la traçabilité matière."]},
+    summary: {"context": "Lancement de la première usine industrielle de bio-recyclage enzymatique du PET par Carbios.", "keyPoints": ["Recyclage de flux PET peu ou pas recyclés (barquettes, opaques, textiles).", "Capacité de 50 000 t/an.", "Soutien public et intégration stratégique européenne."], "impacts": ["Permet le recyclage de structures PET complexes.", "Incitation à reconsidérer le compromis mono/multicouche.", "Importance accrue de la traçabilité matière."]},
   },
   {
     id: 4,
@@ -84,17 +83,17 @@ const ARTICLES_DATA = [
     catchphrase: "Vers des films biosourcés performants et circulaires.",
     sourceName: "Horizon Europe",
     url: "https://www.horizon-europe.gouv.fr/films-and-coatings-circular-packaging-43879",
-    summary: {"context": "Appel Horizon Europe pour développer films et revêtements biosourcés avec scénarios de fin de vie circulaires.", "keyPoints": ["Performances techniques équivalentes aux références fossiles.", "Exigence de scénarios de fin de vie circulaires intégrés.", "Alignement PPWR, économie circulaire, SSbD."], "impacts": ["Axes d'innovation prioritaires pour films barrière biosourcés.", "Orientation de roadmap matériaux et partenariats.", "Check-list d'éco-conception pour futurs développements."]},
+    summary: {"context": "Appel Horizon Europe pour le développement de films et revêtements biosourcés avec démonstration de scénarios de fin de vie circulaires.", "keyPoints": ["Films et coatings biosourcés aux performances équivalentes aux fossiles.", "Exigence d'intégration de scénarios de fin de vie circulaires.", "Alignement avec PPWR et Safe and Sustainable by Design."], "impacts": ["Indique les axes d'innovation prioritaires européens.", "Utile pour orienter une roadmap matériaux.", "Les cahiers des charges servent de check-list d'éco-conception."]},
   },
   {
     id: 5,
     iconComponent: Package,
     iconColor: "text-emerald-400",
     title: "Emballages alimentaires biodégradables à base de fibres d’herbe (BIO‑INSPIRE)",
-    catchphrase: "Alternative fibreuse biodégradable issue de sous-produits agricoles.",
-    sourceName: "CBE‑JU",
+    catchphrase: "Une alternative fibreuse biodégradable issue de sous-produits agricoles.",
+    sourceName: "CBE‑JU (BIO‑INSPIRE)",
     url: "https://www.cbe.europa.eu/events/eu-green-week-2026-conference",
-    summary: {"context": "Solution d'emballage alimentaire biodégradable utilisant des fibres d'herbe issues de flux de biomasse de faible valeur.", "keyPoints": ["Packaging à partir de fibres d'herbe et process durable.", "Renouvelable, biodégradable et circulaire.", "Logique de valorisation de 'sidestreams' agricoles."], "impacts": ["Alternative aux fibres vierges pour packs alimentaires secs.", "Analyse fine des contraintes barrière et de formage.", "À explorer pour biodégradabilité comme critère différenciant."]},
+    summary: {"context": "Packaging alimentaire biodégradable utilisant des fibres d'herbe issues de flux de biomasse de faible valeur.", "keyPoints": ["Packaging fabriqué à partir de fibres d'herbe issues de sous-produits.", "Process de fibrage durable.", "Solution renouvelable, biodégradable et circulaire."], "impacts": ["Alternative potentielle aux fibres vierges pour packs alimentaires secs.", "Nécessite analyse fine des contraintes barrière et de formage.", "À explorer pour la biodégradabilité comme critère de différenciation."]},
   },
   {
     id: 6,
@@ -104,17 +103,17 @@ const ARTICLES_DATA = [
     catchphrase: "Papiers barrière certifiés compostables et recyclables.",
     sourceName: "UPM Speciality Papers",
     url: "https://packaging-journal.de/en/upm-compostable-packaging-papers/",
-    summary: {"context": "Six papiers d'emballage barrière UPM certifiés compostables (domicile/industriel) et recyclables.", "keyPoints": ["Gamme incluant papiers barrière et couchés.", "Certifications NF T51-800 et EN13432.", "Compatibles packs compostables ou hybrides recyclables."], "impacts": ["Structures mono-papier remplaçant complexes papier/plastique.", "Nécessite collaboration avec encreurs et formulateurs.", "Anticipation des cahiers des charges 'plastic-free'."]},
+    summary: {"context": "Six papiers d'emballage barrière UPM certifiés compostables à domicile/industriel et recyclables en fin de vie fibre.", "keyPoints": ["Gamme incluant papiers barrière et couchés.", "Certifications home compost NF T51-800 et industriel EN13432.", "Positionnement comme substrats fibreux pour packs compostables ou recyclables."], "impacts": ["Ouvre la voie aux structures mono-papier remplaçant les complexes plastique.", "Exige travail amont avec encreurs et formulateurs d'adhésifs.", "Intéressant pour anticiper les cahiers des charges 'plastic-free'."]},
   },
   {
     id: 7,
     iconComponent: Target,
     iconColor: "text-purple-400",
-    title: "Symbole universel pour identifier les emballages réemployables (PR3)",
+    title: "Symbole universel pour identifier les emballages réemployables",
     catchphrase: "Standardisation de l'identification des emballages réemployables.",
-    sourceName: "Food Packaging Forum / PR3",
+    sourceName: "PR3 / Food Packaging Forum",
     url: "https://foodpackagingforum.org/news",
-    summary: {"context": "Lancement d'un symbole universel par l'alliance PR3 pour distinguer les emballages réemployables du recyclage.", "keyPoints": ["Symbole réservé aux systèmes de réutilisation stricts.", "Réduit la confusion avec les logos de recyclage.", "Accompagné de lignes directrices techniques."], "impacts": ["Intégration dans le design de packs réemployables.", "Clarification interne 'réemployable' vs 'rechargeable'.", "Base pour spécifications techniques de durabilité."]},
+    summary: {"context": "Lancement par l'alliance PR3 d'un symbole universel pour le réemploi, distinct du recyclage.", "keyPoints": ["Symbole réservé aux systèmes répondant à des critères stricts de réutilisation.", "Vise à réduire la confusion avec les logos de recyclage.", "Développement de lignes directrices techniques pour l'apposition."], "impacts": ["À intégrer dans le design de packs réemployables pour signalétique cohérente.", "Impératif de clarifier la frontière réemploi/rechargeable/recyclable.", "Peut servir de base pour les spécifications techniques de durabilité."]},
   },
   {
     id: 8,
@@ -124,27 +123,27 @@ const ARTICLES_DATA = [
     catchphrase: "Films biodégradables exploitant les lipides intrinsèques de l'amidon.",
     sourceName: "SciJournals",
     url: "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/jctb.70222",
-    summary: {"context": "Exploration de l'amidon de Pouteria sapota, riche en lipides, pour produire des films biopolymères biodégradables.", "keyPoints": ["Films amidon-PVA-glycérol avec lipides naturels.", "Lipides améliorant l'hydrophobicité et propriétés thermiques.", "Biodégradation partielle en sol."], "impacts": ["Concept transférable : lipides intrinsèques pour ajuster propriétés.", "Intéressant pour sachets/intercalaires biodégradables (exigences modérées barrière eau).", "Pistes pour exploiter résidus locaux riches en amidon/lipides."]},
+    summary: {"context": "Exploration de l'utilisation d'amidon de graines de Pouteria sapota, riche en lipides, pour produire des films biopolymères.", "keyPoints": ["Films amidon-PVA-glycérol avec lipides naturels.", "Lipides agissant comme modificateurs interfactiaux, augmentant l'hydrophobicité.", "Biodégradation partielle en sol."], "impacts": ["Concept transférable : tirer parti de lipides intrinsèques pour ajuster propriétés des films.", "Intéressant pour sachets/intercalaires biodégradables avec exigences modérées en barrière à l'eau.", "Pistes de formulation pour exploiter d'autres résidus locaux riches en amidon et lipides."]},
   },
   {
     id: 9,
     iconComponent: Info,
     iconColor: "text-amber-400",
     title: "Recyclage chimique des plastiques d’emballage – première usine en France",
-    catchphrase: "Première usine de recyclage chimique pour déchets d'emballage en France.",
+    catchphrase: "Première usine française de recyclage chimique pour déchets d'emballage.",
     sourceName: "TotalEnergies",
     url: "https://recore-circpack.veolia.com/national-and-local-reports/europe/france/",
-    summary: {"context": "Démarrage de la première usine française de recyclage chimique de déchets plastiques d'emballage par TotalEnergies.", "keyPoints": ["Unité de pyrolyse/craquage de déchets d'emballage ménagers.", "Production de naphta de recyclage pour réinjection.", "Complément aux filières de recyclage mécanique."], "impacts": ["Pertinence des stratégies 'design for recycling' pour flux chimiques.", "Nécessité de documenter finement additifs et charges.", "Intégration dans scénarios ACV et argumentaires contenu recyclé."]},
+    summary: {"context": "Démarrage de la première usine française de recyclage chimique de déchets plastiques d'emballage par TotalEnergies.", "keyPoints": ["Unité de pyrolyse/craquage de déchets d'emballage ménagers.", "Production de naphta de recyclage pour réinjection dans la production de résines vierges.", "Complément aux filières de recyclage mécanique."], "impacts": ["Renforce la pertinence du 'design for recycling' pour flux valorisables en chimie.", "Nécessite documentation fine des additifs pour acceptabilité en recyclage chimique.", "À intégrer dans les scénarios ACV et argumentaires clients sur contenu recyclé."]},
   },
   {
     id: 10,
     iconComponent: Package,
     iconColor: "text-emerald-400",
     title: "Innovations bio‑basées pour emballages – focus CBE‑JU",
-    catchphrase: "Solutions packaging biosourcées et circulaires issues de biomasse de faible valeur.",
+    catchphrase: "Solutions d'emballages biosourcés et circulaires issues de biomasse de faible valeur.",
     sourceName: "CBE‑JU",
     url: "https://www.cbe.europa.eu/events/eu-green-week-2026-conference",
-    summary: {"context": "CBE-JU met en avant des démonstrateurs d'emballages biosourcés et circulaires issus de projets variés.", "keyPoints": ["Boîte burger WoodCell™ sans plastique (barrière graisse/oxygène).", "Matériaux bio-basés (herbes, bois, roseaux...) valorisés.", "Solutions mono-matériau fibreux ou composites bio-basés."], "impacts": ["Potentiel pour emballages alimentaires secs et snacking.", "Amélioration recyclabilité et circularité.", "Orientation vers scénarios de fin de vie circulaires."]},
+    summary: {"context": "CBE‑JU met en avant des démonstrateurs d'emballages biosourcés et circulaires issus de projets comme WOODCELL et Rural BioReFarmeries.", "keyPoints": ["Boîte burger en papier avec revêtement cellulose cristalline (WoodCell™) sans plastique.", "Matériaux bio-basés issus de biomasse de faible valeur (bois, herbes, roseaux).", "Solutions mono-matériau fibreux ou composites bio-basés avec performances barrière ciblées."], "impacts": ["Potentiel pour remplacer emballages plastiques par des solutions fibreuses améliorées.", "Orientation vers des solutions mono-matériau et circulaires.", "Valorisation de flux de biomasse non alimentaires."]},
   },
 ];
 
